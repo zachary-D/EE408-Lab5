@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+//Pertains to deleting candies from the db
+
 public class DeleteActivity extends AppCompatActivity {
   private DatabaseManager dbManager;
 

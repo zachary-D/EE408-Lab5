@@ -24,9 +24,14 @@ public class MainActivity extends AppCompatActivity {
   @Override
   protected void onCreate( Bundle savedInstanceState ) {
     super.onCreate( savedInstanceState );
+
+    //Set what we're looking at
     setContentView( R.layout.activity_main );
+
+    //Create the toolbar across the top of the screen
     Toolbar toolbar = ( Toolbar ) findViewById( R.id.toolbar );
     setSupportActionBar( toolbar );
+
     dbManager = new DatabaseManager( this );
     total = 0.0;
     scrollView = ( ScrollView ) findViewById( R.id.scrollView );
