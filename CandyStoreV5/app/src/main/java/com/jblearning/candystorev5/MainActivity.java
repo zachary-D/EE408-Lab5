@@ -124,4 +124,14 @@ public class MainActivity extends AppCompatActivity {
           Toast.LENGTH_LONG ).show( );
     }
   }
+
+  //NOTE: This is the code the checkout button should run, I wasn't able to get the button to actually appear though.  (You'll probably notice it's stuck under the menu ribbon.)
+
+  private class CheckoutButtonHandler implements View.OnClickListener {
+    public void onClick(View v) {
+      //Handle the checkout button
+      dbManager.logTransaction(total);
+      total = 0;
+    }
+  }
 }
