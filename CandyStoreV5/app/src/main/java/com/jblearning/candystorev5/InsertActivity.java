@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-//Pertains to adding new candies to the DB
-
 public class InsertActivity extends AppCompatActivity {
   private DatabaseManager dbManager;
 
@@ -39,5 +37,7 @@ public class InsertActivity extends AppCompatActivity {
     priceEditText.setText( "" );
   }
 
-  public void goBack( View v ) { this.finish( ); }
+  public void goBack( View v ) {
+    this.finish( );
+  }
 }

@@ -22,69 +22,59 @@ public class MainActivity extends AppCompatActivity {
   private int buttonWidth;
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    //Set what we're looking at
-    setContentView(R.layout.activity_main);
-
-    //Create the toolbar across the top of the screen
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
-
-    dbManager = new DatabaseManager(this);
+  protected void onCreate( Bundle savedInstanceState ) {
+    super.onCreate( savedInstanceState );
+    setContentView( R.layout.activity_main );
+    Toolbar toolbar = ( Toolbar ) findViewById( R.id.toolbar );
+    setSupportActionBar( toolbar );
+    dbManager = new DatabaseManager( this );
     total = 0.0;
-    scrollView = (ScrollView) findViewById(R.id.scrollView);
-    Point size = new Point();
-    getWindowManager().getDefaultDisplay().getSize(size);
+    scrollView = ( ScrollView ) findViewById( R.id.scrollView );
+    Point size = new Point( );
+    getWindowManager( ).getDefaultDisplay( ).getSize( size );
     buttonWidth = size.x / 2;
-    updateView();
+    updateView( );
   }
 
-  protected void onResume() {
-    super.onResume();
-    updateView();
+  protected void onResume( ) {
+    super.onResume( );
+    updateView( );
   }
 
-  public void updateView() {
-    ArrayList<Candy> candies = dbManager.selectAll();
-    if (candies.size() > 0) {
+  public void updateView( ) {
+    ArrayList<Candy> candies = dbManager.selectAll( );
+    if( candies.size( ) > 0 ) {
       // remove subviews inside scrollView if necessary
-      scrollView.removeAllViewsInLayout();
+      scrollView.removeAllViewsInLayout( );
 
       // set up the grid layout
-      GridLayout grid = new GridLayout(this);
-      grid.setRowCount((candies.size() + 1) / 2);
-      grid.setColumnCount(2);
+      GridLayout grid = new GridLayout( this );
+      grid.setRowCount( ( candies.size( ) + 1 ) / 2 );
+      grid.setColumnCount( 2 );
 
       // create array of buttons, 2 per row
-      CandyButton[] buttons = new CandyButton[candies.size()];
-      ButtonHandler bh = new ButtonHandler();
+      CandyButton [] buttons = new CandyButton[candies.size( )];
+      ButtonHandler bh = new ButtonHandler( );
 
       // fill the grid
       int i = 0;
-      for (Candy candy : candies) {
+      for ( Candy candy : candies ) {
         // create the button
-        buttons[i] = new CandyButton(this, candy);
-        buttons[i].setText(candy.getName()
-                + "\n" + candy.getPrice());
+        buttons[i] = new CandyButton( this, candy );
+        buttons[i].setText( candy.getName( )
+            + "\n" + candy.getPrice( ) );
 
         // set up event handling
-        buttons[i].setOnClickListener(bh);
+        buttons[i].setOnClickListener( bh );
 
         // add the button to grid
-        grid.addView(buttons[i], buttonWidth,
-                GridLayout.LayoutParams.WRAP_CONTENT);
+        grid.addView( buttons[i], buttonWidth,
+            GridLayout.LayoutParams.WRAP_CONTENT );
         i++;
       }
-      scrollView.addView(grid);
+      scrollView.addView( grid );
     }
   }
-
- /* public void checkout() {
-    dbManager.logTransaction(total);
-    total = 0;
-  }*/
 
   @Override
   public boolean onCreateOptionsMenu( Menu menu ) {
