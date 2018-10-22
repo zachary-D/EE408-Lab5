@@ -14,24 +14,41 @@ public class DatabaseManager extends SQLiteOpenHelper {
   private static final String ID = "id";
   private static final String NAME = "name";
   private static final String PRICE = "price";
-	
-  public DatabaseManager( Context context ) {
-    super( context, DATABASE_NAME, null, DATABASE_VERSION );
+
+  private static final String TABLE_TRANSAC = "transactionDB";
+  private static final String TRANSAC_ID = "id";
+  private static final String TRANSAC_AMT = "total";
+
+  //Pertains to managing the database (wow, go figure!)
+
+  public DatabaseManager(Context context) {
+    super(context, DATABASE_NAME, null, DATABASE_VERSION);
   }
- 
-  public void onCreate( SQLiteDatabase db ) {
+
+  public void onCreate(SQLiteDatabase db) {
     // build sql create statement
     String sqlCreate = "create table " + TABLE_CANDY + "( " + ID;
     sqlCreate += " integer primary key autoincrement, " + NAME;
-    sqlCreate += " text, " + PRICE + " real )" ;
-    
-    db.execSQL( sqlCreate );
+    sqlCreate += " text, " + PRICE + " real )";
+
+    db.execSQL(sqlCreate);
+
+    db.execSQL("create table " + TABLE_TRANSAC + "( " + TRANSAC_ID + " integer primary key autoincriment, " + TRANSAC_AMT + " real)");
   }
- 
+
+  //Log a transaction
+  public void logTransaction(double amount)
+  {
+    SQLiteDatabase db = this.getWritableDatabase();
+    db.execSQL("insert into " + TABLE_TRANSAC + " values( null,'" + amount + "' )");
+    db.close();
+  }
+
   public void onUpgrade( SQLiteDatabase db,
                          int oldVersion, int newVersion ) {
     // Drop old table if it exists
     db.execSQL( "drop table if exists " + TABLE_CANDY );
+    db.execSQL( "drop table if exists " + TABLE_TRANSAC);
     // Re-create tables
     onCreate( db );
   }
