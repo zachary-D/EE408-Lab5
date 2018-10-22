@@ -33,7 +33,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     db.execSQL(sqlCreate);
 
-    db.execSQL("create table " + TABLE_TRANSAC + "( " + TRANSAC_ID + " integer primary key autoincriment, " + TRANSAC_AMT + " real)");\
+    db.execSQL("create table " + TABLE_TRANSAC + "( " + TRANSAC_ID + " integer primary key autoincriment, " + TRANSAC_AMT + " real)");
   }
 
   //Log a transaction
