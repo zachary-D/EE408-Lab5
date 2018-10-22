@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
       // set up the grid layout
       GridLayout grid = new GridLayout(this);
-      grid.setRowCount((candies.size() + 1) / 2);
+      //The size + 1 / 2 gets the number of rows we need to list all our candy, the + 1 is for the 'check out' button
+      grid.setRowCount(((candies.size() + 1) / 2) + 1);
       grid.setColumnCount(2);
 
       // create array of buttons, 2 per row
@@ -66,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
       for (Candy candy : candies) {
         // create the button
         buttons[i] = new CandyButton(this, candy);
-        buttons[i].setText(candy.getName()
-                + "\n" + candy.getPrice());
+        String MakeTheCompilerHappy = candy.getName() + "\n" + candy.getPrice();
+        buttons[i].setText(MakeTheCompilerHappy);
 
         // set up event handling
         buttons[i].setOnClickListener(bh);
